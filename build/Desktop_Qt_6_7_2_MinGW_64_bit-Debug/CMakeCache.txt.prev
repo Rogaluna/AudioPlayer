@@ -306,6 +306,15 @@ CMAKE_TOOLCHAIN_FILE:STRING=C:/Program Files/vcpkg/scripts/buildsystems/vcpkg.cm
 // Studio IDE projects all commands are done without /nologo.
 CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
 
+//Value Computed by CMake
+QHotkey_BINARY_DIR:STATIC=E:/Projects/Qt/AudioPlayer/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/thirdparty/QHotkey
+
+//Value Computed by CMake
+QHotkey_IS_TOP_LEVEL:STATIC=OFF
+
+//Value Computed by CMake
+QHotkey_SOURCE_DIR:STATIC=E:/Projects/Qt/AudioPlayer/thirdparty/QHotkey
+
 //Additional directories where find(Qt6 ...) host Qt components
 // are searched
 QT_ADDITIONAL_HOST_PACKAGES_PREFIX_PATH:STRING=
@@ -500,7 +509,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=1
+CMAKE_NUMBER_OF_MAKEFILES:INTERNAL=2
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP

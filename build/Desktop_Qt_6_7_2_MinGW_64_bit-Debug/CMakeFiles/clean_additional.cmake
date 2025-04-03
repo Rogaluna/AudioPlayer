@@ -6,5 +6,8 @@ if("${CONFIG}" STREQUAL "" OR "${CONFIG}" STREQUAL "Debug")
   "AudioPlayer_autogen"
   "CMakeFiles\\AudioPlayer_autogen.dir\\AutogenUsed.txt"
   "CMakeFiles\\AudioPlayer_autogen.dir\\ParseCache.txt"
+  "thirdparty\\QHotkey\\CMakeFiles\\QHotkey_autogen.dir\\AutogenUsed.txt"
+  "thirdparty\\QHotkey\\CMakeFiles\\QHotkey_autogen.dir\\ParseCache.txt"
+  "thirdparty\\QHotkey\\QHotkey_autogen"
   )
 endif()

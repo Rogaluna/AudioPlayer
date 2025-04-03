@@ -46,6 +46,10 @@ private:
 
     EPlayMode m_playbackMode;
 
+    QMap<QString, QVariantMap> m_historyMedia;   // 历史专辑（UID -> 专辑数据）
+    QMap<QString, int> m_mediaUpdate;           // 更新历史 (UID -> 最后一次载入时间戳)
+    QString m_historySavePath;                   // 历史记录保存路径
+
 private:
     void updateCurrentMedia();
     void shuffleIterators();
@@ -53,6 +57,10 @@ private:
 signals:
     void metadataListChanged();
     void currentMediaChanged();
+
+public:
+    void loadHistoryFromFile();
+    void saveHistoryFromFile();
 };
 
 #endif // QMEDIAPLAYLIST_H

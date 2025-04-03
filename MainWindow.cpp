@@ -4,6 +4,8 @@
 #include <QFileDialog>
 #include <QStandardPaths>
 #include <QDebug>
+#include <QMimeType>
+#include <QMimeDatabase>
 #include "Tools/MediaMetadataExtractor.h"
 
 MainWindow::MainWindow(QWidget *parent)
@@ -83,12 +85,21 @@ void MainWindow::initMedia()
 
 void MainWindow::initHotKeys()
 {
+    m_playHotkey = new QHotkey(QKeySequence("Ctrl+Alt+F5"), true);
+    m_previousHotkey = new QHotkey(QKeySequence("Ctrl+Alt+Left"), true);
+    m_nextHotkey = new QHotkey(QKeySequence("Ctrl+Alt+Right"), true);
 
+    connect(m_playHotkey, &QHotkey::activated, this, &MainWindow::onPlayShortcutActivated);
+    connect(m_previousHotkey, &QHotkey::activated, this, &MainWindow::onPreviousShortcutActivated);
+    connect(m_nextHotkey, &QHotkey::activated, this, &MainWindow::onNextShortcutActivated);
 }
 
 void MainWindow::postInitialize()
 {
     ui->radioBtn_list->click();
+
+    // 初始化播放列表
+
 }
 
 void MainWindow::reloadPlayList(const QVector<QVariantMap>& entries)
@@ -100,11 +111,23 @@ void MainWindow::reloadPlayList(const QVector<QVariantMap>& entries)
 void MainWindow::openAudioFile()
 {
     // 打开音频文件，置入播放列表和当前播放
+    QStringList audioMimeFilters;
+    const QList<QMimeType> mimes = QMimeDatabase().allMimeTypes();
+    foreach (const QMimeType &mime, mimes) {
+        if (mime.name().startsWith("audio/")) {
+            audioMimeFilters += mime.globPatterns();
+        }
+    }
+
+    // 生成过滤器字符串
+    QString filter = tr("Supported Audio Files") + " (";
+    filter += audioMimeFilters.join(" ") + ");;" +
+              tr("All Files") + " (*)";
 
     QUrl fileUrl = QFileDialog::getOpenFileUrl(this,
-                                               tr("Open Audio File"),
-                                               QUrl::fromLocalFile(QStandardPaths::standardLocations(QStandardPaths::MusicLocation).value(0, QDir::homePath())),
-                                               tr("Audio Files (*.mp3 *.wav *.ogg *.flac)"));
+        tr("Open Audio File"),
+        m_settings.value("LastAudioFileDir", QUrl::fromLocalFile(QStandardPaths::standardLocations(QStandardPaths::MusicLocation).value(0, QDir::homePath()))).toUrl(),
+        filter);
 
     if (!fileUrl.isEmpty()) {
         // 如果成功打开，设置当前专辑为【临时专辑】,并将专辑内（当前音频包括在内）的音频同步导入到播放列表中
@@ -308,6 +331,21 @@ void MainWindow::onPlayProgressReleased()
     {
         m_mediaPlayer->play();
     }
+}
+
+void MainWindow::onPlayShortcutActivated()
+{
+    onPlayStateClicked();
+}
+
+void MainWindow::onPreviousShortcutActivated()
+{
+    onPreviousMediaClicked();
+}
+
+void MainWindow::onNextShortcutActivated()
+{
+    onNextMediaClicked();
 }
 
 void MainWindow::showPlayList()

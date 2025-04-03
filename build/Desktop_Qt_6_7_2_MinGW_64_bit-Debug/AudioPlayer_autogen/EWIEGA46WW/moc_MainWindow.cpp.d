@@ -2,9 +2,12 @@ E:/Projects/Qt/AudioPlayer/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/AudioPlayer
   E:/Projects/Qt/AudioPlayer/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/AudioPlayer_autogen/moc_predefs.h \
   C:/Program_Files/Qt/6.7.2/mingw_64/include/QtCore/QDir \
   C:/Program_Files/Qt/6.7.2/mingw_64/include/QtCore/QFile \
+  C:/Program_Files/Qt/6.7.2/mingw_64/include/QtCore/QLoggingCategory \
   C:/Program_Files/Qt/6.7.2/mingw_64/include/QtCore/QMap \
   C:/Program_Files/Qt/6.7.2/mingw_64/include/QtCore/QObject \
+  C:/Program_Files/Qt/6.7.2/mingw_64/include/QtCore/QPair \
   C:/Program_Files/Qt/6.7.2/mingw_64/include/QtCore/QPropertyAnimation \
+  C:/Program_Files/Qt/6.7.2/mingw_64/include/QtCore/QSettings \
   C:/Program_Files/Qt/6.7.2/mingw_64/include/QtCore/QString \
   C:/Program_Files/Qt/6.7.2/mingw_64/include/QtCore/QUrl \
   C:/Program_Files/Qt/6.7.2/mingw_64/include/QtCore/QVariant \
@@ -71,6 +74,7 @@ E:/Projects/Qt/AudioPlayer/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/AudioPlayer
   C:/Program_Files/Qt/6.7.2/mingw_64/include/QtCore/qlist.h \
   C:/Program_Files/Qt/6.7.2/mingw_64/include/QtCore/qlocale.h \
   C:/Program_Files/Qt/6.7.2/mingw_64/include/QtCore/qlogging.h \
+  C:/Program_Files/Qt/6.7.2/mingw_64/include/QtCore/qloggingcategory.h \
   C:/Program_Files/Qt/6.7.2/mingw_64/include/QtCore/qmalloc.h \
   C:/Program_Files/Qt/6.7.2/mingw_64/include/QtCore/qmap.h \
   C:/Program_Files/Qt/6.7.2/mingw_64/include/QtCore/qmargins.h \
@@ -95,6 +99,7 @@ E:/Projects/Qt/AudioPlayer/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/AudioPlayer
   C:/Program_Files/Qt/6.7.2/mingw_64/include/QtCore/qscopedpointer.h \
   C:/Program_Files/Qt/6.7.2/mingw_64/include/QtCore/qscopeguard.h \
   C:/Program_Files/Qt/6.7.2/mingw_64/include/QtCore/qset.h \
+  C:/Program_Files/Qt/6.7.2/mingw_64/include/QtCore/qsettings.h \
   C:/Program_Files/Qt/6.7.2/mingw_64/include/QtCore/qshareddata.h \
   C:/Program_Files/Qt/6.7.2/mingw_64/include/QtCore/qshareddata_impl.h \
   C:/Program_Files/Qt/6.7.2/mingw_64/include/QtCore/qsharedpointer.h \
@@ -143,6 +148,7 @@ E:/Projects/Qt/AudioPlayer/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/AudioPlayer
   C:/Program_Files/Qt/6.7.2/mingw_64/include/QtCore/qversiontagging.h \
   C:/Program_Files/Qt/6.7.2/mingw_64/include/QtCore/qxptype_traits.h \
   C:/Program_Files/Qt/6.7.2/mingw_64/include/QtCore/qyieldcpu.h \
+  C:/Program_Files/Qt/6.7.2/mingw_64/include/QtGui/QKeySequence \
   C:/Program_Files/Qt/6.7.2/mingw_64/include/QtGui/QStandardItemModel \
   C:/Program_Files/Qt/6.7.2/mingw_64/include/QtGui/qaction.h \
   C:/Program_Files/Qt/6.7.2/mingw_64/include/QtGui/qbitmap.h \
@@ -437,4 +443,6 @@ E:/Projects/Qt/AudioPlayer/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/AudioPlayer
   E:/Projects/Qt/AudioPlayer/Tools/AlbumManager.h \
   E:/Projects/Qt/AudioPlayer/Tools/QMediaPlayList.h \
   E:/Projects/Qt/AudioPlayer/Widgets/PlayListWidget.h \
-  E:/Projects/Qt/AudioPlayer/Widgets/QSlidePanel.h
+  E:/Projects/Qt/AudioPlayer/Widgets/QSlidePanel.h \
+  E:/Projects/Qt/AudioPlayer/thirdparty/QHotkey/QHotkey \
+  E:/Projects/Qt/AudioPlayer/thirdparty/QHotkey/qhotkey.h

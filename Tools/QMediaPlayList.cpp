@@ -1,9 +1,24 @@
 #include "QMediaPlayList.h"
+#include <QDir>
+#include <QJsonArray>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QStandardPaths>
 #include <random>
 
 QMediaPlayList::QMediaPlayList(QObject *parent)
     : QObject{parent}
-{}
+{
+    // 初始化历史记录存储路径
+    QString appDataPath = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
+    QDir dir(appDataPath);
+    if (!dir.exists()) {
+        dir.mkpath(".");
+    }
+    m_historySavePath = dir.filePath("play_history.json");
+
+    loadHistoryFromFile();
+}
 
 QMediaPlayList::EPlayMode QMediaPlayList::getPlaybackMode() const
 {
@@ -181,6 +196,13 @@ void QMediaPlayList::updateCurrentMedia()
     //     m_pcurrentMedia = &m_vmediaInfo.front();
     // }
 
+    QVariantMap currentMediaMetadata = *m_currentMedia;
+    // 更新历史记录
+    m_historyMedia[currentMediaMetadata["Url"].toString()] = currentMediaMetadata;
+    m_mediaUpdate[currentMediaMetadata["Url"].toString()] = QDateTime::currentSecsSinceEpoch();
+
+    saveHistoryFromFile();
+
     emit metadataListChanged();
 }
 
@@ -201,6 +223,51 @@ void QMediaPlayList::shuffleIterators()
         std::uniform_int_distribution<> distrib(0, i);
         int j = distrib(gen);
         qSwap(m_randomMediaList[i], m_randomMediaList[j]);
+    }
+}
+
+void QMediaPlayList::loadHistoryFromFile()
+{
+    QFile file(m_historySavePath);
+    if (!file.open(QIODevice::ReadOnly)) {
+        return;
+    }
+
+    QJsonDocument doc = QJsonDocument::fromJson(file.readAll());
+    if (doc.isObject()) {
+        QJsonObject root = doc.object();
+        QJsonArray historyArray = root["history"].toArray();
+
+        for (const QJsonValue& val : historyArray) {
+            QJsonObject obj = val.toObject();
+            QString url = obj["url"].toString();
+            QVariantMap data = obj["data"].toObject().toVariantMap();
+            int timestamp = obj["timestamp"].toInt();
+            m_historyMedia[url] = data;
+            m_mediaUpdate[url] = timestamp;
+        }
+    }
+}
+
+void QMediaPlayList::saveHistoryFromFile()
+{
+    QJsonArray historyArray;
+
+    for (auto it = m_historyMedia.begin(); it != m_historyMedia.end(); ++it) {
+        QJsonObject obj;
+        obj["url"] = it.key();
+        obj["data"] = QJsonObject::fromVariantMap(it.value());
+        obj["timestamp"] = m_mediaUpdate.value(it.key());
+        historyArray.append(obj);
+    }
+
+    QJsonObject root;
+    root["history"] = historyArray;
+    QJsonDocument doc(root);
+
+    QFile file(m_historySavePath);
+    if (file.open(QIODevice::WriteOnly)) {
+        file.write(doc.toJson());
     }
 }
 

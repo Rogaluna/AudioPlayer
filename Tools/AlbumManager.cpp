@@ -20,8 +20,31 @@ AlbumManager::AlbumManager(QObject *parent)
     }
     m_historySavePath = dir.filePath("album_history.json");
 
-    // 加载历史记录
     loadHistoryFromFile();
+}
+
+void AlbumManager::loadAlbum(const QUrl &url)
+{
+    // 使用小写协议名称进行统一判断
+    const QString scheme = url.scheme().toLower();
+
+    static const QSet<QString> networkSchemes{
+        "http", "https", "ftp", "ftps", "sftp"
+    };
+
+    // 判断逻辑分层处理
+    if (networkSchemes.contains(scheme)) {          // 网络协议判断
+        loadNetworkAlbum(url);
+    } else if ( scheme == "file" ||
+               (scheme.isEmpty() && QFile::exists(url.toLocalFile()))) { // 本地协议判断
+        loadLocalAlbum(url);
+    } else {                                // 异常情况处理
+        qWarning().nospace()
+            << "Unsupported URL scheme ["
+            << url.scheme()
+            << "] for: "
+            << url.toString();
+    }
 }
 
 void AlbumManager::loadNetworkAlbum(const QUrl &url)
@@ -105,7 +128,15 @@ void AlbumManager::loadLocalAlbum(const QUrl &url)
     localAlbum["name"] = dirName;
     localAlbum["desc"] = "";
     localAlbum["tracks"] = audioFiles;
-    localAlbum["uid"] = "0"; // 特殊标识
+    localAlbum["uid"] = dirPath; // 以文件夹路径做标识
+    localAlbum["url"] = "file:///" + dirPath;
+
+    // 更新历史记录
+    m_historyAlbums[dirPath] = localAlbum;
+    m_albumsUpdate[dirPath] = QDateTime::currentSecsSinceEpoch();
+
+    // 保存更新后的历史记录
+    saveHistoryToFile();
 
     // 更新当前专辑并触发信号
     m_currentAlbum = localAlbum;
@@ -147,6 +178,7 @@ void AlbumManager::loadHistoryFromFile()
     if (doc.isObject()) {
         QJsonObject root = doc.object();
         QJsonArray historyArray = root["history"].toArray();
+
         for (const QJsonValue& val : historyArray) {
             QJsonObject obj = val.toObject();
             QString uid = obj["uid"].toString();
@@ -174,7 +206,7 @@ void AlbumManager::saveHistoryToFile()
     QJsonDocument doc(root);
 
     QFile file(m_historySavePath);
-    if (file.open(QIODevice::WriteOnly)) {
+    if (file.open(QIODevice::WriteOnly)) {    
         file.write(doc.toJson());
     }
 }

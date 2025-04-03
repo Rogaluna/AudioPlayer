@@ -1,0 +1,27 @@
+{
+	"backtrace" : 0,
+	"backtraceGraph" : 
+	{
+		"commands" : [],
+		"files" : 
+		[
+			"thirdparty/QHotkey/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			}
+		]
+	},
+	"id" : "QHotkey_autogen_timestamp_deps::@ff461a0525e81b91e938",
+	"isGeneratorProvided" : true,
+	"name" : "QHotkey_autogen_timestamp_deps",
+	"paths" : 
+	{
+		"build" : "thirdparty/QHotkey",
+		"source" : "thirdparty/QHotkey"
+	},
+	"sources" : [],
+	"type" : "UTILITY"
+}

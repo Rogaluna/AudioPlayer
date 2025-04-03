@@ -21,6 +21,8 @@ class AlbumManager : public QObject
 public:
     explicit AlbumManager(QObject *parent = nullptr);
 
+    void loadAlbum(const QUrl& url);
+
     // 加载网络专辑文件（从文件中解析专辑UID，并记录到历史）
     void loadNetworkAlbum(const QUrl& url);
 
@@ -43,7 +45,7 @@ private:
     QMap<QString, int> m_albumsUpdate;           // 更新历史 (UID -> 最后一次载入时间戳)
     QString m_historySavePath;                   // 历史记录保存路径
 
-private:
+public:
     void loadHistoryFromFile();
     void saveHistoryToFile();
 };

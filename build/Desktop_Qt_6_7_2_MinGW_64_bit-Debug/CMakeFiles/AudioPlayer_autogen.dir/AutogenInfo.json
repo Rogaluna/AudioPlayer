@@ -390,6 +390,7 @@
 	],
 	"MOC_INCLUDES" : 
 	[
+		"E:/Projects/Qt/AudioPlayer/thirdparty/QHotkey",
 		"C:/Program_Files/Qt/6.7.2/mingw_64/include/QtCore",
 		"C:/Program_Files/Qt/6.7.2/mingw_64/include",
 		"C:/Program_Files/Qt/6.7.2/mingw_64/mkspecs/win32-g++",

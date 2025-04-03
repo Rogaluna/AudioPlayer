@@ -9,6 +9,8 @@
 #include <QMediaPlayer>
 #include <QAudioOutput>
 #include <QButtonGroup>
+#include <QHotkey>
+#include <QSettings>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -48,7 +50,14 @@ private:
     QButtonGroup *m_group;
 
 private:
+    QHotkey *m_playHotkey;
+    QHotkey *m_previousHotkey;
+    QHotkey *m_nextHotkey;
+
+private:
     bool m_bPlayState;
+
+    QSettings m_settings;
 
 private:
     // 重载播放列表数据
@@ -78,5 +87,11 @@ private slots:
     void onPlayProgressReleased();
 
     void showPlayList();
+
+private slots:
+    // 快捷键触发槽
+    void onPlayShortcutActivated();
+    void onPreviousShortcutActivated();
+    void onNextShortcutActivated();
 };
 #endif // MAINWINDOW_H

@@ -3,9 +3,12 @@ AudioPlayer_autogen/timestamp: \
 	C:/Program_Files/Qt/6.7.2/mingw_64/include/QtCore/QDir \
 	C:/Program_Files/Qt/6.7.2/mingw_64/include/QtCore/QEventLoop \
 	C:/Program_Files/Qt/6.7.2/mingw_64/include/QtCore/QFile \
+	C:/Program_Files/Qt/6.7.2/mingw_64/include/QtCore/QLoggingCategory \
 	C:/Program_Files/Qt/6.7.2/mingw_64/include/QtCore/QMap \
 	C:/Program_Files/Qt/6.7.2/mingw_64/include/QtCore/QObject \
+	C:/Program_Files/Qt/6.7.2/mingw_64/include/QtCore/QPair \
 	C:/Program_Files/Qt/6.7.2/mingw_64/include/QtCore/QPropertyAnimation \
+	C:/Program_Files/Qt/6.7.2/mingw_64/include/QtCore/QSettings \
 	C:/Program_Files/Qt/6.7.2/mingw_64/include/QtCore/QString \
 	C:/Program_Files/Qt/6.7.2/mingw_64/include/QtCore/QTimer \
 	C:/Program_Files/Qt/6.7.2/mingw_64/include/QtCore/QUrl \
@@ -77,6 +80,7 @@ AudioPlayer_autogen/timestamp: \
 	C:/Program_Files/Qt/6.7.2/mingw_64/include/QtCore/qlist.h \
 	C:/Program_Files/Qt/6.7.2/mingw_64/include/QtCore/qlocale.h \
 	C:/Program_Files/Qt/6.7.2/mingw_64/include/QtCore/qlogging.h \
+	C:/Program_Files/Qt/6.7.2/mingw_64/include/QtCore/qloggingcategory.h \
 	C:/Program_Files/Qt/6.7.2/mingw_64/include/QtCore/qmalloc.h \
 	C:/Program_Files/Qt/6.7.2/mingw_64/include/QtCore/qmap.h \
 	C:/Program_Files/Qt/6.7.2/mingw_64/include/QtCore/qmargins.h \
@@ -101,6 +105,7 @@ AudioPlayer_autogen/timestamp: \
 	C:/Program_Files/Qt/6.7.2/mingw_64/include/QtCore/qscopedpointer.h \
 	C:/Program_Files/Qt/6.7.2/mingw_64/include/QtCore/qscopeguard.h \
 	C:/Program_Files/Qt/6.7.2/mingw_64/include/QtCore/qset.h \
+	C:/Program_Files/Qt/6.7.2/mingw_64/include/QtCore/qsettings.h \
 	C:/Program_Files/Qt/6.7.2/mingw_64/include/QtCore/qshareddata.h \
 	C:/Program_Files/Qt/6.7.2/mingw_64/include/QtCore/qshareddata_impl.h \
 	C:/Program_Files/Qt/6.7.2/mingw_64/include/QtCore/qsharedpointer.h \
@@ -150,6 +155,7 @@ AudioPlayer_autogen/timestamp: \
 	C:/Program_Files/Qt/6.7.2/mingw_64/include/QtCore/qversiontagging.h \
 	C:/Program_Files/Qt/6.7.2/mingw_64/include/QtCore/qxptype_traits.h \
 	C:/Program_Files/Qt/6.7.2/mingw_64/include/QtCore/qyieldcpu.h \
+	C:/Program_Files/Qt/6.7.2/mingw_64/include/QtGui/QKeySequence \
 	C:/Program_Files/Qt/6.7.2/mingw_64/include/QtGui/QStandardItemModel \
 	C:/Program_Files/Qt/6.7.2/mingw_64/include/QtGui/qaction.h \
 	C:/Program_Files/Qt/6.7.2/mingw_64/include/QtGui/qbitmap.h \
@@ -678,6 +684,8 @@ AudioPlayer_autogen/timestamp: \
 	E:/Projects/Qt/AudioPlayer/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/CMakeFiles/3.29.3/CMakeSystem.cmake \
 	E:/Projects/Qt/AudioPlayer/main.cpp \
 	E:/Projects/Qt/AudioPlayer/resources.qrc \
+	E:/Projects/Qt/AudioPlayer/thirdparty/QHotkey/QHotkey \
+	E:/Projects/Qt/AudioPlayer/thirdparty/QHotkey/qhotkey.h \
 	E:/Projects/Qt/AudioPlayer/MainWindow.ui \
 	E:/Projects/Qt/AudioPlayer/Widgets/AlbumLoadDialog.ui \
 	E:/Projects/Qt/AudioPlayer/Widgets/MediaEntry.ui \
