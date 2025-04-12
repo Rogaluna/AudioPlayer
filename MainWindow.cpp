@@ -6,17 +6,24 @@
 #include <QDebug>
 #include <QMimeType>
 #include <QMimeDatabase>
+#include <QSystemTrayIcon>
 #include "Tools/MediaMetadataExtractor.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
+
+    , m_bInitPlayList(false)
 {
     ui->setupUi(this);
+
+    initApplication();
 
     initMedia();
     initWidgets();
     initHotKeys();
+
+    initConfigs();
 
     postInitialize();
 }
@@ -24,6 +31,30 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::initApplication()
+{
+    // 创建托盘图标
+    m_trayIcon = new QSystemTrayIcon(this);
+    m_trayIcon->setIcon(QIcon(":images/res/app_icon.ico")); // 设置图标
+    m_trayIcon->setToolTip(qApp->applicationName());
+
+    // 创建右键菜单
+    m_trayMenu = new QMenu(this);
+    m_quitAction = new QAction(QIcon::fromTheme(QIcon::ThemeIcon::SystemLogOut), "退出", this);
+    connect(m_quitAction, &QAction::triggered, this, &MainWindow::onQuit);
+
+    m_trayMenu->addAction(m_quitAction);
+    m_trayIcon->setContextMenu(m_trayMenu);
+
+    // 连接托盘图标激活信号
+    connect(m_trayIcon, &QSystemTrayIcon::activated,
+            this, &MainWindow::onTrayIconActivated);
+
+    m_trayIcon->show();
+
+    qApp->setQuitOnLastWindowClosed(false);
 }
 
 void MainWindow::initWidgets()
@@ -94,12 +125,38 @@ void MainWindow::initHotKeys()
     connect(m_nextHotkey, &QHotkey::activated, this, &MainWindow::onNextShortcutActivated);
 }
 
+void MainWindow::initConfigs()
+{
+    if (!QFile::exists(CONFIG_FILE_NAME)) {
+        qDebug() << "Config file not found, creating default...";
+        QSettings initSettings(CONFIG_FILE_NAME, QSettings::IniFormat);
+        initSettings.setValue("VolumnValue", 100);
+        initSettings.setValue("PlayMode", static_cast<int>(QMediaPlayList::List));
+        initSettings.setValue("AlbumUrl", "");
+        initSettings.setValue("LastAudioUrl", "");
+        initSettings.setValue("LastOpenDir", "");
+        initSettings.sync();
+    }
+
+    m_settings = new QSettings(CONFIG_FILE_NAME, QSettings::IniFormat);
+}
+
 void MainWindow::postInitialize()
 {
-    ui->radioBtn_list->click();
-
+    // 初始化音量大小
+    onVolumeChanged(m_settings->value("VolumnValue", 100).toInt());
+    // 初始化播放模式
+    onRadioGroupClicked(
+        m_group->button(m_settings->value("PlayMode", static_cast<int>(QMediaPlayList::List)).toInt())
+    );
     // 初始化播放列表
+    m_albumManager->loadAlbum(m_settings->value("AlbumUrl", "").toString());
 
+    m_bInitPlayList = true;
+
+    // 载入音乐
+    QString lasturl = m_settings->value("LastAudioUrl", "").toString();
+    m_mediaPlayList->setMediaByUrl(lasturl);
 }
 
 void MainWindow::reloadPlayList(const QVector<QVariantMap>& entries)
@@ -126,16 +183,39 @@ void MainWindow::openAudioFile()
 
     QUrl fileUrl = QFileDialog::getOpenFileUrl(this,
         tr("Open Audio File"),
-        m_settings.value("LastAudioFileDir", QUrl::fromLocalFile(QStandardPaths::standardLocations(QStandardPaths::MusicLocation).value(0, QDir::homePath()))).toUrl(),
+        m_settings->value("LastOpenDir", QUrl::fromLocalFile(QStandardPaths::standardLocations(QStandardPaths::MusicLocation).value(0, QDir::homePath()))).toUrl(),
         filter);
 
     if (!fileUrl.isEmpty()) {
         // 如果成功打开，设置当前专辑为【临时专辑】,并将专辑内（当前音频包括在内）的音频同步导入到播放列表中
-        m_albumManager->loadLocalAlbum(fileUrl);
+        m_albumManager->loadAlbum(fileUrl);
 
-        // m_mediaPlayList->setPlayList(fileUrl);
-        // m_mediaPlayer->setSource(fileUrl);
-        // m_mediaPlayer->play();
+        if (!fileUrl.isLocalFile()) {
+            qWarning() << "URL is not a local directory";
+            return;
+        }
+
+        QString originalPath = fileUrl.toLocalFile();
+        QFileInfo fileInfo(originalPath);
+
+        // 如果是文件路径，自动修正为所在目录
+        QString dirPath = fileInfo.isDir() ? originalPath : fileInfo.dir().absolutePath();
+
+        m_settings->setValue("LastOpenDir", dirPath);
+    }
+}
+
+void MainWindow::onQuit()
+{
+    m_trayIcon->hide(); // 移除托盘图标
+    qApp->quit();
+}
+
+void MainWindow::onTrayIconActivated(QSystemTrayIcon::ActivationReason reason)
+{
+    if(reason == QSystemTrayIcon::DoubleClick) {
+        showNormal();
+        activateWindow();
     }
 }
 
@@ -207,9 +287,12 @@ void MainWindow::onMediaStateChanged(QMediaPlayer::MediaStatus state)
 
 void MainWindow::onVolumeChanged(int pos)
 {
+    ui->slider_volume->setValue(pos);
     m_audioOutput->setVolume((float)pos/100.f);
 
     ui->label_volume->setText(QString::number(pos));
+
+    m_settings->setValue("VolumnValue", pos);
 }
 
 void MainWindow::onAlbumChanged(const QVariantMap &album)
@@ -224,7 +307,10 @@ void MainWindow::onAlbumChanged(const QVariantMap &album)
         metadataList.append(metadata);
     }
 
-    m_mediaPlayList->append(metadataList);
+    m_mediaPlayList->setPlayList(metadataList);
+
+    // 保存配置值
+    m_settings->setValue("AlbumUrl", album["url"].toString());  // 修改当前专辑值
 }
 
 void MainWindow::onMetadataListChanged()
@@ -253,11 +339,17 @@ void MainWindow::onCurrentMediaChanged()
 
         ui->label_mediaName->setText(metadata["Title"].toString());
     }
+
+    if (m_bInitPlayList)
+    {
+        m_settings->setValue("LastAudioUrl", metadata["Url"].toString());
+    }
 }
 
 void MainWindow::onMediaClicked(const QVariantMap &metadata)
 {
-    m_mediaPlayer->setSource(metadata["Url"].toString());
+    // m_mediaPlayer->setSource(metadata["Url"].toString());
+    m_mediaPlayList->setMediaByUrl(metadata["Url"].toString());
     m_mediaPlayer->play();
 }
 
@@ -303,8 +395,11 @@ void MainWindow::onNextMediaClicked()
 
 void MainWindow::onRadioGroupClicked(QAbstractButton *btn)
 {
+    btn->setChecked(true);
     int id = m_group->id(btn);
     m_mediaPlayList->setPlaybackMode(static_cast<QMediaPlayList::EPlayMode>(id));
+
+    m_settings->setValue("PlayMode", id);
 }
 
 void MainWindow::onPlayProgressChanged(int value)

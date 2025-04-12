@@ -42,6 +42,6 @@ void MediaEntry::setEntry(const QVariantMap &metadata)
 void MediaEntry::update()
 {
     ui->label_mediaName->setText(m_metadata["Title"].toString());
-    ui->label_author->setText(m_metadata["ContributingArtist"].toString());
+    ui->label_author->setText(m_metadata["Author"].toString());
     ui->label_time->setText(m_metadata["Duration"].toString());
 }

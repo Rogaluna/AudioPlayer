@@ -1,0 +1,28 @@
+{
+	"BUILD_DIR" : "E:/Projects/Qt/AudioPlayer/build/Desktop_Qt_6_7_2_MinGW_64_bit-Release/AudioPlayer_autogen",
+	"CMAKE_BINARY_DIR" : "E:/Projects/Qt/AudioPlayer/build/Desktop_Qt_6_7_2_MinGW_64_bit-Release",
+	"CMAKE_CURRENT_BINARY_DIR" : "E:/Projects/Qt/AudioPlayer/build/Desktop_Qt_6_7_2_MinGW_64_bit-Release",
+	"CMAKE_CURRENT_SOURCE_DIR" : "E:/Projects/Qt/AudioPlayer",
+	"CMAKE_SOURCE_DIR" : "E:/Projects/Qt/AudioPlayer",
+	"CROSS_CONFIG" : false,
+	"GENERATOR" : "Ninja",
+	"INCLUDE_DIR" : "E:/Projects/Qt/AudioPlayer/build/Desktop_Qt_6_7_2_MinGW_64_bit-Release/AudioPlayer_autogen/include",
+	"INPUTS" : 
+	[
+		"E:/Projects/Qt/AudioPlayer/res/app_icon_dark.ico",
+		"E:/Projects/Qt/AudioPlayer/res/power.png",
+		"E:/Projects/Qt/AudioPlayer/res/file.png",
+		"E:/Projects/Qt/AudioPlayer/res/app_icon.ico"
+	],
+	"LOCK_FILE" : "E:/Projects/Qt/AudioPlayer/build/Desktop_Qt_6_7_2_MinGW_64_bit-Release/CMakeFiles/AudioPlayer_autogen.dir/AutoRcc_resources_EWIEGA46WW_Lock.lock",
+	"MULTI_CONFIG" : false,
+	"OPTIONS" : [ "--no-zstd", "-name", "resources" ],
+	"OUTPUT_CHECKSUM" : "EWIEGA46WW",
+	"OUTPUT_NAME" : "qrc_resources.cpp",
+	"RCC_EXECUTABLE" : "C:/Program_Files/Qt/6.7.2/mingw_64/./bin/rcc.exe",
+	"RCC_LIST_OPTIONS" : [ "--list" ],
+	"SETTINGS_FILE" : "E:/Projects/Qt/AudioPlayer/build/Desktop_Qt_6_7_2_MinGW_64_bit-Release/CMakeFiles/AudioPlayer_autogen.dir/AutoRcc_resources_EWIEGA46WW_Used.txt",
+	"SOURCE" : "E:/Projects/Qt/AudioPlayer/resources.qrc",
+	"USE_BETTER_GRAPH" : false,
+	"VERBOSITY" : 0
+}

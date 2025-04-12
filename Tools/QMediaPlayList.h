@@ -30,6 +30,7 @@ public:
     void setPlayList(const QVector<QVariantMap>& metadataList);
 
     QVariantMap getCurrentMediaValue();
+    void setMediaByUrl(const QString& url);
     QVector<QVariantMap>::ConstIterator getCurrentMediaIterator();
     const QVector<QVariantMap>& getMetadataList() const;
 
@@ -41,13 +42,14 @@ public:
 
 private:
     QVector<QVariantMap> m_metadataList;
+
     QVector<QVariantMap>::ConstIterator m_currentMedia;
     QVector<QVector<QVariantMap>::iterator> m_randomMediaList;
 
     EPlayMode m_playbackMode;
 
-    QMap<QString, QVariantMap> m_historyMedia;   // 历史专辑（UID -> 专辑数据）
-    QMap<QString, int> m_mediaUpdate;           // 更新历史 (UID -> 最后一次载入时间戳)
+    QMap<QString, QVariantMap> m_historyMedia;   // 历史音频（URL -> 专辑数据）
+    QMap<QString, int> m_mediaUpdate;            // 更新历史 (URL -> 最后一次载入时间戳)
     QString m_historySavePath;                   // 历史记录保存路径
 
 private:

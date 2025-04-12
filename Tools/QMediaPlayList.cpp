@@ -10,7 +10,7 @@ QMediaPlayList::QMediaPlayList(QObject *parent)
     : QObject{parent}
 {
     // 初始化历史记录存储路径
-    QString appDataPath = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
+    QString appDataPath = "./";
     QDir dir(appDataPath);
     if (!dir.exists()) {
         dir.mkpath(".");
@@ -56,6 +56,7 @@ void QMediaPlayList::append(const QVector<QVariantMap> &metadataList)
 void QMediaPlayList::setPlayList(const QVector<QVariantMap> &metadataList)
 {
     m_metadataList.clear();
+
     append(metadataList);
 }
 
@@ -63,6 +64,20 @@ QVariantMap QMediaPlayList::getCurrentMediaValue()
 {
     QVariantMap metadata = *m_currentMedia;
     return metadata;
+}
+
+void QMediaPlayList::setMediaByUrl(const QString &url)
+{
+    // 如果列表中有对应 url 的音乐，就进行设置，否则不设置
+    for (auto it = m_metadataList.begin(); it < m_metadataList.end(); it ++)
+    {
+        QVariantMap metadata = *it;
+        if (metadata["Url"].toString() == url)
+        {
+            setCurrentMedia(it);
+        }
+    }
+
 }
 
 QVector<QVariantMap>::ConstIterator QMediaPlayList::getCurrentMediaIterator()

@@ -33,6 +33,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
         resources.qrc
+        app_icon.rc
         Tools/QMediaPlayList.h Tools/QMediaPlayList.cpp
         Widgets/QMaskWidget.h Widgets/QMaskWidget.cpp
         Widgets/QSlidePanel.h Widgets/QSlidePanel.cpp

@@ -11,14 +11,15 @@
 #include <QButtonGroup>
 #include <QHotkey>
 #include <QSettings>
+#include <QSystemTrayIcon>
+
+#define CONFIG_FILE_NAME "config.ini"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
 }
 QT_END_NAMESPACE
-
-class PlayListWidget;
 
 class MainWindow : public QMainWindow
 {
@@ -29,14 +30,21 @@ public:
     ~MainWindow();
 
 public:
+    void initApplication();
+
     void initWidgets();
     void initMedia();
     void initHotKeys();
+
+    void initConfigs();
 
     void postInitialize();
 
 private:
     Ui::MainWindow *ui;
+    QSystemTrayIcon *m_trayIcon;
+    QMenu *m_trayMenu;
+    QAction *m_quitAction;
 
     QAudioOutput* m_audioOutput;
     QMediaPlayer* m_mediaPlayer;
@@ -57,7 +65,11 @@ private:
 private:
     bool m_bPlayState;
 
-    QSettings m_settings;
+    QSettings* m_settings;
+
+private:
+
+    uint8_t m_bInitPlayList : 1; // 初始化播放列表
 
 private:
     // 重载播放列表数据
@@ -65,6 +77,9 @@ private:
 
 private slots:
     void openAudioFile();
+    void onQuit();
+
+    void onTrayIconActivated(QSystemTrayIcon::ActivationReason reason);
 
     void onStateChanged(QMediaPlayer::PlaybackState state);
     void onPositionChanged(qint64 pos);

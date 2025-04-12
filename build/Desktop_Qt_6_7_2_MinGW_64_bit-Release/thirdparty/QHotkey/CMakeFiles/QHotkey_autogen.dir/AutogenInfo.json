@@ -1,0 +1,122 @@
+{
+	"AUTOGEN_COMMAND_LINE_LENGTH_MAX" : 32000,
+	"BUILD_DIR" : "E:/Projects/Qt/AudioPlayer/build/Desktop_Qt_6_7_2_MinGW_64_bit-Release/thirdparty/QHotkey/QHotkey_autogen",
+	"CMAKE_BINARY_DIR" : "E:/Projects/Qt/AudioPlayer/build/Desktop_Qt_6_7_2_MinGW_64_bit-Release",
+	"CMAKE_CURRENT_BINARY_DIR" : "E:/Projects/Qt/AudioPlayer/build/Desktop_Qt_6_7_2_MinGW_64_bit-Release/thirdparty/QHotkey",
+	"CMAKE_CURRENT_SOURCE_DIR" : "E:/Projects/Qt/AudioPlayer/thirdparty/QHotkey",
+	"CMAKE_EXECUTABLE" : "C:/Program_Files/Qt/Tools/CMake_64/bin/cmake.exe",
+	"CMAKE_LIST_FILES" : 
+	[
+		"E:/Projects/Qt/AudioPlayer/thirdparty/QHotkey/CMakeLists.txt",
+		"E:/Projects/Qt/AudioPlayer/build/Desktop_Qt_6_7_2_MinGW_64_bit-Release/.qtc/package-manager/auto-setup.cmake"
+	],
+	"CMAKE_SOURCE_DIR" : "E:/Projects/Qt/AudioPlayer",
+	"CROSS_CONFIG" : false,
+	"DEP_FILE" : "E:/Projects/Qt/AudioPlayer/build/Desktop_Qt_6_7_2_MinGW_64_bit-Release/thirdparty/QHotkey/QHotkey_autogen/deps",
+	"DEP_FILE_RULE_NAME" : "QHotkey_autogen/timestamp",
+	"HEADERS" : 
+	[
+		[
+			"E:/Projects/Qt/AudioPlayer/thirdparty/QHotkey/qhotkey.h",
+			"MU",
+			"EWIEGA46WW/moc_qhotkey.cpp",
+			null
+		],
+		[
+			"E:/Projects/Qt/AudioPlayer/thirdparty/QHotkey/qhotkey_p.h",
+			"MU",
+			"EWIEGA46WW/moc_qhotkey_p.cpp",
+			null
+		]
+	],
+	"HEADER_EXTENSIONS" : [ "h", "hh", "h++", "hm", "hpp", "hxx", "in", "txx" ],
+	"INCLUDE_DIR" : "E:/Projects/Qt/AudioPlayer/build/Desktop_Qt_6_7_2_MinGW_64_bit-Release/thirdparty/QHotkey/QHotkey_autogen/include",
+	"MOC_COMPILATION_FILE" : "E:/Projects/Qt/AudioPlayer/build/Desktop_Qt_6_7_2_MinGW_64_bit-Release/thirdparty/QHotkey/QHotkey_autogen/mocs_compilation.cpp",
+	"MOC_DEFINITIONS" : 
+	[
+		"MINGW_HAS_SECURE_API=1",
+		"QHOTKEY_LIBRARY",
+		"QHOTKEY_SHARED",
+		"QT_CORE_LIB",
+		"QT_GUI_LIB",
+		"QT_NO_DEBUG",
+		"UNICODE",
+		"WIN32",
+		"WIN64",
+		"_ENABLE_EXTENDED_ALIGNED_STORAGE",
+		"_UNICODE",
+		"_WIN64"
+	],
+	"MOC_DEPEND_FILTERS" : 
+	[
+		[
+			"Q_PLUGIN_METADATA",
+			"[\n][ \t]*Q_PLUGIN_METADATA[ \t]*\\([^\\)]*FILE[ \t]*\"([^\"]+)\""
+		]
+	],
+	"MOC_INCLUDES" : 
+	[
+		"E:/Projects/Qt/AudioPlayer/build/Desktop_Qt_6_7_2_MinGW_64_bit-Release/thirdparty/QHotkey",
+		"E:/Projects/Qt/AudioPlayer/thirdparty/QHotkey",
+		"C:/Program_Files/Qt/6.7.2/mingw_64/include/QtCore",
+		"C:/Program_Files/Qt/6.7.2/mingw_64/include",
+		"C:/Program_Files/Qt/6.7.2/mingw_64/mkspecs/win32-g++",
+		"C:/Program_Files/Qt/6.7.2/mingw_64/include/QtGui",
+		"C:/Program_Files/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++",
+		"C:/Program_Files/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/x86_64-w64-mingw32",
+		"C:/Program_Files/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include/c++/backward",
+		"C:/Program_Files/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include",
+		"C:/Program_Files/Qt/Tools/mingw1120_64/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed",
+		"C:/Program_Files/Qt/Tools/mingw1120_64/x86_64-w64-mingw32/include"
+	],
+	"MOC_MACRO_NAMES" : 
+	[
+		"Q_OBJECT",
+		"Q_GADGET",
+		"Q_NAMESPACE",
+		"Q_NAMESPACE_EXPORT",
+		"Q_GADGET_EXPORT",
+		"Q_ENUM_NS"
+	],
+	"MOC_OPTIONS" : [],
+	"MOC_PATH_PREFIX" : false,
+	"MOC_PREDEFS_CMD" : 
+	[
+		"C:/Program_Files/Qt/Tools/mingw1120_64/bin/g++.exe",
+		"-std=gnu++20",
+		"-dM",
+		"-E",
+		"-c",
+		"C:/Program_Files/Qt/Tools/CMake_64/share/cmake-3.29/Modules/CMakeCXXCompilerABI.cpp"
+	],
+	"MOC_PREDEFS_FILE" : "E:/Projects/Qt/AudioPlayer/build/Desktop_Qt_6_7_2_MinGW_64_bit-Release/thirdparty/QHotkey/QHotkey_autogen/moc_predefs.h",
+	"MOC_RELAXED_MODE" : false,
+	"MOC_SKIP" : [],
+	"MULTI_CONFIG" : false,
+	"PARALLEL" : 20,
+	"PARSE_CACHE_FILE" : "E:/Projects/Qt/AudioPlayer/build/Desktop_Qt_6_7_2_MinGW_64_bit-Release/thirdparty/QHotkey/CMakeFiles/QHotkey_autogen.dir/ParseCache.txt",
+	"QT_MOC_EXECUTABLE" : "C:/Program_Files/Qt/6.7.2/mingw_64/./bin/moc.exe",
+	"QT_UIC_EXECUTABLE" : "C:/Program_Files/Qt/6.7.2/mingw_64/./bin/uic.exe",
+	"QT_VERSION_MAJOR" : 6,
+	"QT_VERSION_MINOR" : 7,
+	"SETTINGS_FILE" : "E:/Projects/Qt/AudioPlayer/build/Desktop_Qt_6_7_2_MinGW_64_bit-Release/thirdparty/QHotkey/CMakeFiles/QHotkey_autogen.dir/AutogenUsed.txt",
+	"SOURCES" : 
+	[
+		[
+			"E:/Projects/Qt/AudioPlayer/thirdparty/QHotkey/qhotkey.cpp",
+			"MU",
+			null
+		],
+		[
+			"E:/Projects/Qt/AudioPlayer/thirdparty/QHotkey/qhotkey_win.cpp",
+			"MU",
+			null
+		]
+	],
+	"UIC_OPTIONS" : [],
+	"UIC_SEARCH_PATHS" : [],
+	"UIC_SKIP" : [],
+	"UIC_UI_FILES" : [],
+	"USE_BETTER_GRAPH" : false,
+	"VERBOSITY" : 0
+}

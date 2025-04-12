@@ -1,5 +1,7 @@
 #include "MediaMetadataExtractor.h"
 
+#include <QFileInfo>
+
 MediaMetadataExtractor::MediaMetadataExtractor(QObject *parent)
     : QObject{parent}
 {}
@@ -44,6 +46,63 @@ QVariantMap MediaMetadataExtractor::extractMetadata(const QUrl &url, int timeout
         QVariant value = mediaData.value(key);
         if (!value.isNull()) {
             metadata[metaDataKeyToString(key)] = value;
+            continue;
+        }
+    }
+
+    if (metadata[metaDataKeyToString(QMediaMetaData::Title)].isNull())   // 当取标题失败的时候
+    {
+        // 从文件字符串中解析
+        QString path = url.path();
+        QString filenameWithExtension = QFileInfo(path).fileName();
+        // 去除扩展名
+        QString filename = QFileInfo(filenameWithExtension).completeBaseName();
+        // 分割作者和标题
+        QStringList parts = filename.split(" - ");
+        QString title;
+        if (parts.size() >= 2) {
+            parts.removeFirst();
+            title = parts.first().trimmed();
+        } else {
+            // 无法分割时，整个文件名作为标题
+            title = filename.trimmed();
+        }
+
+        metadata[metaDataKeyToString(QMediaMetaData::Title)] = title;
+    }
+
+    if (metadata[metaDataKeyToString(QMediaMetaData::Author)].isNull())  // 当取作者失败的时候
+    {
+        // 从贡献艺术家中复制
+        if (!metadata[metaDataKeyToString(QMediaMetaData::ContributingArtist)].isNull())
+        {
+            metadata[metaDataKeyToString(QMediaMetaData::Author)] = metadata[metaDataKeyToString(QMediaMetaData::ContributingArtist)];
+
+        }
+        // 从专辑作者中复制
+        else if (!mediaData.value(QMediaMetaData::AlbumArtist).isNull())
+        {
+            metadata[metaDataKeyToString(QMediaMetaData::Author)] = metadata[metaDataKeyToString(QMediaMetaData::AlbumArtist)];
+        }
+
+        else
+        {
+            // 从文件字符串中解析
+            QString path = url.path();
+            QString filenameWithExtension = QFileInfo(path).fileName();
+            // 去除扩展名
+            QString filename = QFileInfo(filenameWithExtension).completeBaseName();
+            // 分割作者和标题
+            QStringList parts = filename.split(" - ");
+            QString artist;
+            if (parts.size() >= 2) {
+                artist = parts.first().trimmed();
+            } else {
+                // 无法分割时，使用默认值
+                artist = "Unknown";
+            }
+
+            metadata[metaDataKeyToString(QMediaMetaData::Author)] = artist;
         }
     }
 

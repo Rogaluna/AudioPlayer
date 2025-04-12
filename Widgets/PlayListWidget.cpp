@@ -34,7 +34,7 @@ PlayListWidget::~PlayListWidget()
 
 void PlayListWidget::addMediaEntry(const QVariantMap &metadata)
 {
-    QString mediaString = QString("%1 - %2").arg(metadata["Title"].toString(), metadata["ContributingArtist"].toString());
+    QString mediaString = QString("%1 - %2").arg(metadata["Title"].toString(), metadata["Author"].toString());
     QStandardItem* item = new QStandardItem(mediaString);
 
     item->setData(metadata, Qt::UserRole);
